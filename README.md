@@ -9,8 +9,9 @@ Here is a summary of the script's functionality:
 <ul>
 <li>Lists all of the teachers in a course.</li>
 <li>Allows the user to select which teachers they want to remove.</li>
-</ul>
 <li>Sends a request to Canvas to remove the selected teachers.</li>
+</ul>
+
 
 Here is a list of the script's benefits:
 <ul>
