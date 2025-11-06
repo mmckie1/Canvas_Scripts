@@ -64,14 +64,14 @@ If you want the script to run in multiple environments (prod/test/beta), replace
   
   Remove Bulk Teacher Enrollments.
 
-Click the button to open the dialog:
+<li>Click the button to open the dialog:</li>
 
-Use the header checkbox to Select All or pick individually.
+<li>Use the header checkbox to Select All or pick individually.
 
-Click Remove Teachers to begin.
+<li>Click Remove Teachers to begin.</li>
 
-The script deletes in batches of 40 enrollments with short waits in between.
+<li>The script deletes in batches of 40 enrollments with short waits in between.</li>
 
-On success, you’ll see a confirmation; the page refreshes to reflect changes.
+<li>On success, you’ll see a confirmation; the page refreshes to reflect changes.</li>
 
 </ol>
