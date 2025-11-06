@@ -74,3 +74,15 @@ If you want the script to run in multiple environments (prod/test/beta), replace
   <li>On success, you’ll see a confirmation; the page refreshes to reflect changes.</li>
 
 </ol>
+## How it works (high level)
+
+<ul>
+  <li>Sections: GET /api/v1/courses/:course_id/sections?per_page=99</li>
+
+  <li>Enrollments (teachers): GET /api/v1/courses/:course_id/enrollments?type[]=TeacherEnrollment&per_page=99&page=… (Follows Link headers to collect all pages)</li>
+
+  <li>Delete: DELETE /api/v1/courses/:course_id/enrollments/:enrollment_id?task=delete (Executed asynchronously in small batches)</li>
+</ul>
+
+
+The UI uses Canvas’ styling classes and jQuery UI dialogs already present in Canvas.
