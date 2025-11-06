@@ -61,17 +61,16 @@ If you want the script to run in multiple environments (prod/test/beta), replace
   <li>Navigate to Course → People (/courses/:course_id/users).</li>
 
   <li>If your role includes teacher, limited_admin, admin, or root_admin, you’ll see a button:</li>
-  
-  Remove Bulk Teacher Enrollments.
+    <ol> <li> Remove Bulk Teacher Enrollments.</li></ol>
+  <li>Click the button to open the dialog:</li>
 
-<li>Click the button to open the dialog:</li>
+  <ol>
+    <li>Use the header checkbox to Select All or pick individually.</li>
+    <li>Click Remove Teachers to begin.</li>
+  </ol>
 
-<li>Use the header checkbox to Select All or pick individually.
+  <li>The script deletes in batches of 40 enrollments with short waits in between.</li>
 
-<li>Click Remove Teachers to begin.</li>
-
-<li>The script deletes in batches of 40 enrollments with short waits in between.</li>
-
-<li>On success, you’ll see a confirmation; the page refreshes to reflect changes.</li>
+  <li>On success, you’ll see a confirmation; the page refreshes to reflect changes.</li>
 
 </ol>
