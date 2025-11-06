@@ -1,30 +1,77 @@
-# Canvas Scripts
-Relate Canvas User scripts
+# Canvas Teacher Bulk Remove Enrollments Tool
+A Tampermonkey/Greasemonkey userscript that adds a UI in Canvas People page to bulk remove Teacher enrollments from a course.
+> Tested on Canvas UI with built-in jQuery UI. Uses Canvas REST endpoints to fetch sections/enrollments and send batched delete requests.
 
-UserScripts for Canvas LMS
-
-Canvas Remove Teacher Tool is a script that will allow an admin to remove teachers (teacher base roles) from courses in bulk. The table is sortable by name or last activity date. The "Add More" button will load the next 100 teachers. It is useful for managing manually created course enrollments for Blueprints.
-
-The script uses the Canvas API to list all of the teachers in a course. It then uses a user interface to allow the Admin to select which teachers they want to remove. Once the teachers have been selected, the script sends a request to Canvas to remove the selected teachers.
-
-Summary of the script's functionality:
+## Features
 <ul>
-<li>Lists all of the teachers in a course.</li>
-<li>Allows Admin to select which teachers they want to remove.</li>
-<li>Sends a request to Canvas to remove the selected teachers.</li>
+  <li>Adds a “Remove Bulk Teacher Enrollments” button on People (/courses/:id/users)</li>
+  <li>Lists all Teacher enrollments with:</li>
+  <ul>
+    <li>Teacher Name</li>
+    <li>Section</li>
+    <li>Enrollment Date</li>
+    <li>Last Activity (sortable columns)</li>
+  </ul>
+  <li>Select all/multi-select via checkboxes</li>
+  <li>Batcher deletion (Chuncks of 40, ~5s pause) to be gentle on rate limits</li>
+  <li>Sucess and progress dialogs with simple feedback</li>
+  <li>Role-gated: button shows only for user with any of teacher, limited_admin, admin, root_admin</li>
 </ul>
 
-List of the script's benefits:
-<ul>
-<li>It can save Admin time by allowing them to remove multiple teachers from a course at once.</li>
-<li>It can help to keep courses organized by removing teachers who are no longer needed.</li>
-<li>It can help to reduce the number of errors that can occur when manually removing teachers from a course.</li>
-</ul>
+## Installation 
+<ol>
+  <li>Install a userscript manager:</li>
+  <ul>
+    <li>
+      Tampermonkey (recommended)
+    </li>
+    <li>
+      Greasemonkey/Violentmonkey also work
+    </li>
+  </ul>
+  <li>Create a new script and paste the contents of canvas-teacher-bulk-remove.user.js</li>
+  <li>Update the domain include (if needed) to match your Canvas hostname(s)</li>
+</ol>
 
-Detailed breakdown of the code:
-<ul>
-<li>The script starts by initializing the Canvas API.</li>
-<li>The script then uses the API to list all of the teachers in a course.</li>
-<li>The script then uses a user interface to allow the user to select which teachers they want to remove.</li>
-<li>Once the teachers have been selected, the script sends a request to Canvas to remove the selected teachers.</li>
-</ul>
+Metadata block example (from this repo):
+```bash
+// ==UserScript==
+// @name         Canvas Teacher Bulk Remove Enrollments Tool
+// @namespace    https://github.com/sukotsuchido/CanvasUserScripts
+// @version      2.11
+// @description  A Canvas UserScript to bulk remove teacher enrollments from a course.
+// @author       Morgan H. McKie (m.mckie123@gmail.com)
+// @include      https://dev.instructure.com/courses/*/users
+// @require      https://code.jquery.com/jquery-3.4.1.min.js
+// @grant        none
+// ==/UserScript==
+```
+
+If you want the script to run in multiple environments (prod/test/beta), replace @include with @match lines, for example:
+```bash
+// @match  https://*.instructure.com/courses/*/users
+// @match  https://canvas.*.edu/courses/*/users
+```
+
+> Only users with the proper Canvas permissions will be able to remove enrollments.
+
+## Usage
+
+<ol>
+  <li>Navigate to Course → People (/courses/:course_id/users).</li>
+
+  <li>If your role includes teacher, limited_admin, admin, or root_admin, you’ll see a button:</li>
+  
+  Remove Bulk Teacher Enrollments.
+
+Click the button to open the dialog:
+
+Use the header checkbox to Select All or pick individually.
+
+Click Remove Teachers to begin.
+
+The script deletes in batches of 40 enrollments with short waits in between.
+
+On success, you’ll see a confirmation; the page refreshes to reflect changes.
+
+</ol>
